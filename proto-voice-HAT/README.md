@@ -3,6 +3,8 @@
 A custom, DIY voice HAT prototype for Raspberry Pi, built with commonly available parts like Adafruit and SparkFun breakout boards etc..  
 V1 has a single microphone, a 3W amp for audio output and a RGB LED to indicate different states.
 
+![proto-hat-phase-01](images/proto-hat-phase-01.jpg)
+
 # Resources
 
 ## HAT and Breakout Boards
