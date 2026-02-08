@@ -4,6 +4,7 @@ A custom, DIY voice HAT prototype for Raspberry Pi, built with commonly availabl
 V1 has a single microphone, a 3W amp for audio output and a RGB LED to indicate different states.
 
 ![proto-hat-phase-01](images/proto-hat-phase-01.jpg)
+![proto-hat-speaker-v1](images/proto-hat-speaker-v1.jpg)
 
 
 # Parts
@@ -48,13 +49,14 @@ Install the required packages to build the EEPROM tools, create the EEPROM data 
 
 IMPORTANT: Before you try to flash the EEPROM make sure the write-protect PIN next to the EEPROM (labeled WP) is grounded. It should be by default.  
   
-Build the [EEPROM utils]((./eepromutils)):
+Build the [EEPROM utils](./eepromutils):
 - `cd eepromutils`
 - `bash build.sh`
 
 Use the prepared files to build your EEPROM image:
 - `cd ../drivers`
 - `../eepromutils/eepmake -v1 eeprom_settings.txt custom_voice_hat.eep aiy_hat.dtbo`
+
 NOTE: we attach the AIY-HAT overlay directly to the EEPROM image. See section 1b if this leads to errors on future RPis.
 
 Backup the original EEPROM (optional, but a good connection test as well):
@@ -107,7 +109,7 @@ gpio=18,19,20,21=a0
 ## 2. General tweaks/fixes for the /boot/config.txt
 
 Some modifications to the default confix.txt that usually work well on Raspberry Pi 4.
-Note that this assumes you are using a sound only via the custom HAT.
+Note that this assumes you are using sound only via the custom HAT.
 
 ```
 # Enable SPI for the LED
@@ -125,7 +127,7 @@ core_freq_min=500
 
 ## 3. ALSA setup via asound.config
 
-Please check out the [alsa-config](./alsa-config) folder and make sure to copy the config to your user space!
+Please check out the [alsa-config](./alsa-config) folder. Make sure to install the ALSA plugins and copy the config to your user space!
 
 Set the volume with:
 - `alsamixer`
