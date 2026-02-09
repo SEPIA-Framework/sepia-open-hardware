@@ -15,7 +15,10 @@ V1 has a single microphone, a 3W amp for audio output and a RGB LED to indicate 
 - [Adafruit I2S MEMS Microphone Breakout](https://learn.adafruit.com/adafruit-i2s-mems-microphone-breakout)
 - [Adafruit MAX98357 I2S Class-D Mono Amp](https://learn.adafruit.com/adafruit-max98357-i2s-class-d-mono-amp)
 - [SparkFun WS2812B RGB LED Breakout](https://github.com/sparkfun/WS2812_Breakout)
-- TODO: Button
+- Button: Any [tactile switch button](https://www.adafruit.com/category/759) will do, choose one you like :-)
+
+NOTE: This board has been designed when there was only one [Raspberry Pi HAT specification](https://datasheets.raspberrypi.com/hat/hat-plus-specification.pdf).
+Since there is a newer specification as well, this is technically a V1 HAT.
 
 ## Additional Parts
 
@@ -38,7 +41,11 @@ Please check out the [soldering-steps](./soldering-steps) folder to learn how yo
 
 This section describes how to get the Proto Voice HAT working on your Raspberry Pi.
 If you have an Adafruit Proto HAT with EEPROM, I recommend to install the EEPROM tools to flash it once. This way the HAT will be recognized automatically by the OS.  
-If you want to skip the EEPROM for testing, see step 1b.
+If you want to skip the EEPROM for testing, see step 1b.  
+  
+Start by cloning this repository and enter the folder:
+- `git clone https://github.com/SEPIA-Framework/sepia-open-hardware.git`
+- `cd sepia-open-hardware/proto-voice-HAT`
 
 ## 1a. Setup with EEPROM
 
@@ -52,6 +59,7 @@ IMPORTANT: Before you try to flash the EEPROM make sure the write-protect PIN ne
 Build the [EEPROM utils](./eepromutils):
 - `cd eepromutils`
 - `bash build.sh`
+- `chmod +x eepflash.sh`
 
 Use the prepared files to build your EEPROM image:
 - `cd ../drivers`
@@ -130,7 +138,9 @@ core_freq_min=500
 Please check out the [alsa-config](./alsa-config) folder. Make sure to install the ALSA plugins and copy the config to your user space!
 
 Set the volume with:
-- `alsamixer`
+- initialize devices: `aplay -q -d 1 /dev/zero && arecord -q -d 1 /dev/null`
+- `alsamixer` (choose your card with F6)
+- or use: `amixer set "Master Playback" 50%` and `amixer set "Mic Boost Filtered" 92%`
 
 To test your settings use:
 - `arecord -D default -r 16000 -f S16_LE -c 1 -t wav -d 10 test.wav`
@@ -142,7 +152,13 @@ Please see the [GPIO item for CLEXI](https://github.com/bytemind-de/nodejs-clien
 
 ## 5. Raspberry Pi SEPIA Client
 
-Please see the official [RPi SEPIA Client docs](https://github.com/SEPIA-Framework/sepia-installation-and-setup/tree/master/sepia-client-installation/rpi#2a-sepia-client-installation).
+Please see the official [RPi SEPIA Client docs](https://github.com/SEPIA-Framework/sepia-installation-and-setup/tree/master/sepia-client-installation/rpi#2a-sepia-client-installation).  
+  
+Recommendations:
+- Install Node.js before you install the SEPIA DIY Client: `sudo apt install nodejs npm` (RPi OS 12 and 13 should support this)
+- Disable Pulseaudio (if the SEPIA Client installed it) to test the Proto Voice HAT, it usually skips our fancy ALSA settings ^^:
+  - systemctl --user stop pulseaudio.service
+  - systemctl --user mask pulseaudio.socket
 
 
 # Resources and Credits
