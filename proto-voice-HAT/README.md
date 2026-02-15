@@ -157,9 +157,38 @@ Please see the official [RPi SEPIA Client docs](https://github.com/SEPIA-Framewo
 Recommendations:
 - Install Node.js before you install the SEPIA DIY Client: `sudo apt install nodejs npm` (RPi OS 12 and 13 should support this)
 - Disable Pulseaudio (if the SEPIA Client installed it) to test the Proto Voice HAT, it usually skips our fancy ALSA settings ^^:
-  - systemctl --user stop pulseaudio.service
-  - systemctl --user mask pulseaudio.socket
+  - `systemctl --user stop pulseaudio.service`
+  - `systemctl --user mask pulseaudio.socket`
 
+SEPIA DIY Client `clexiGpioInterface` [settings](https://github.com/SEPIA-Framework/sepia-html-client-app/blob/master/Settings.md):
+```
+"clexiGpioInterface": {
+	"buttons": [{
+		"id": "hw-mic-button",
+		"pin": 23
+	}],
+	"leds": [{}],
+	"items": [{
+		"id": "led-array",
+		"file": "rpi-spi-rgb-leds",
+		"options": {
+				"numOfLeds": 1,
+				"ledType": "ws281x"
+		},
+		"modes": {
+				"idle": [{"ledIndex": 1, "red": 0, "green": 0, "blue": 0}],
+				"listening": [{"ledIndex": 1, "red": 80, "green": 0, "blue": 0}],
+				"speaking": [{"ledIndex": 1, "red": 0, "green": 0, "blue": 80}],
+				"awaitDialog": [{"ledIndex": 1, "red": 60, "green": 60, "blue": 0}],
+				"loading": [{"ledIndex": 1, "red": 10, "green": 10, "blue": 10}],
+				"wakeWordActive": [{"ledIndex": 1, "red": 10, "green": 0, "blue": 0}],
+				"wakeWordInactive": [{"ledIndex": 1, "red": 0, "green": 0, "blue": 0}],
+				"eventEffectsOn": [],
+				"eventEffectsOff": []
+		}
+	}]
+}
+```
 
 # Resources and Credits
 
