@@ -155,7 +155,6 @@ Please see the [GPIO item for CLEXI](https://github.com/bytemind-de/nodejs-clien
 Please see the official [RPi SEPIA Client docs](https://github.com/SEPIA-Framework/sepia-installation-and-setup/tree/master/sepia-client-installation/rpi#2a-sepia-client-installation).  
   
 Recommendations:
-- Install Node.js before you install the SEPIA DIY Client: `sudo apt install nodejs npm` (RPi OS 12 and 13 should support this)
 - Disable Pulseaudio (if the SEPIA Client installed it) to test the Proto Voice HAT, it usually skips our fancy ALSA settings ^^:
   - `systemctl --user stop pulseaudio.service`
   - `systemctl --user mask pulseaudio.socket`
