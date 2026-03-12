@@ -13,7 +13,16 @@ Download and extract it it via:
 - `wget https://github.com/SEPIA-Framework/sepia-open-hardware/raw/refs/heads/main/mycroft-mark2-4-sepia/mark-ii-raspberrypi.tar.gz`
 - `tar -xzf mark-ii-raspberrypi.tar.gz`
 
-Then simply run `./install.sh`.
+Then run `./install.sh` from `mycroft-mark2-4-sepia`.
+
+### Boot config
+
+The installer should set this automatically, but just to make sure plz check your boot confix.txt for these lines:
+```
+dtparam=audio=off
+...
+dtoverlay=vc4-kms-v3d,noaudio
+```
 
 ## Changes to the original installation process
 
@@ -60,7 +69,9 @@ sudo cp vocalfusion-soundcard.ko /lib/modules/$(uname -r)/extra/
 
 # SEPIA Client Installation
 
-Check the official installation guide for the [SEPIA DIY Client](https://github.com/SEPIA-Framework/sepia-installation-and-setup/tree/master/sepia-client-installation/rpi).
+Check the official installation guide for the [SEPIA DIY Client](https://github.com/SEPIA-Framework/sepia-installation-and-setup/tree/master/sepia-client-installation/rpi).  
+  
+**TODO:** add CLEXI support for LED control and button listeners
 
 ## Tweaks
 
